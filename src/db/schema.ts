@@ -12,16 +12,17 @@ export const user = pgTable("user", {
 });
 
 // create a session table
-export const session = pgTable("session", {
-  id: text("id").primaryKey().notNull(),
-  userId: text("user_id")
+export const session = pgTable('session', {
+  id: text('id').primaryKey().notNull(),
+  userId: text('user_id')
     .notNull()
-    .references(() => user.id, { onDelete: "cascade" }),
-  expiresAt: timestamp("expires_at").notNull(),
-  ipAdress: text("ip_address"),
-  userAgent: text("user_agent"),
-  createdAt: timestamp("created_at").notNull().defaultNow(),
-  updatedAt: timestamp("updated_at").notNull().defaultNow(),
+    .references(() => user.id, { onDelete: 'cascade' }),
+  token: text('token').notNull().unique(),
+  expiresAt: timestamp('expires_at').notNull(),
+  ipAdress: text('ip_address'),
+  userAgent: text('user_agent'),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at').notNull().defaultNow(),
 });
 
 // create an account table
